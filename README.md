@@ -57,3 +57,22 @@ execute the script target:
 npm run update-local-deps
 ```
 
+## development
+
+Install dependencies:
+
+```
+npm install
+```
+
+Run linting:
+
+```
+npm run lint
+```
+
+Run integration tests:
+
+```
+npm run test:integration
+```

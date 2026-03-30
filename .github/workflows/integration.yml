@@ -1,0 +1,26 @@
+name: Integration
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint-and-integration:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Run integration test
+        run: npm run test:integration
