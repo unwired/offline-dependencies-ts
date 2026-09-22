@@ -96,13 +96,17 @@ npm run test:integration
 
 ## releasing
 
-Consumers pin to a git tag, so a new version is only consumable once it is
-tagged. Bump the version in package.json, merge to master, then tag that
-commit:
+This package is not published to npm, so a release is a git tag plus a
+GitHub release. Consumers pin to the tag, and a new version is only
+consumable once that tag exists.
+
+Bump the version in package.json, merge to master, then tag that commit
+and publish a release for it:
 
 ```
 git tag v1.0.4
 git push origin v1.0.4
+gh release create v1.0.4 --title v1.0.4 --notes "..."
 ```
 
 Afterwards update the reference in the consuming repositories.
