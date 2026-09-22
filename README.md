@@ -1,4 +1,4 @@
-# local-dependencies
+# offline-dependencies
 
 This tool allows a localDependencies specification in a package.json which
 provides a list of packages, that will be downloaded in a local folder in
@@ -6,11 +6,28 @@ their packed tgz form (using npm pack) and can be checked in to a repository.
 
 This local package will then be installed into the local source tree.
 
+This is the Unwired-maintained fork of the original `offline-dependencies`
+package, which is no longer maintained upstream (npm still serves 1.0.2 from
+2021). The package name and the `local-dependencies` command are unchanged, so
+switching to this fork only requires changing the dependency reference.
+
 ## installing
 
+This fork is not published to npm — install it from GitHub, pinned to a tag:
+
 ```
-npm i --save-dev offline-dependencies-js
+npm i --save-optional git+https://github.com/unwired/offline-dependencies-ts.git#v1.0.3
 ```
+
+which records in your package.json:
+
+```
+"optionalDependencies": {
+  "offline-dependencies": "git+https://github.com/unwired/offline-dependencies-ts.git#v1.0.3"
+}
+```
+
+Always pin to a tag rather than tracking `master`, so builds stay reproducible.
 
 ## use cases
 
@@ -76,3 +93,16 @@ Run integration tests:
 ```
 npm run test:integration
 ```
+
+## releasing
+
+Consumers pin to a git tag, so a new version is only consumable once it is
+tagged. Bump the version in package.json, merge to master, then tag that
+commit:
+
+```
+git tag v1.0.4
+git push origin v1.0.4
+```
+
+Afterwards update the reference in the consuming repositories.
